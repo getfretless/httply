@@ -1,23 +1,15 @@
 #!/usr/bin/env ruby
 require 'cgi'
 cgi = CGI.new
-
-if cgi['name'].empty?
-  honoriffics = ['Mr. President', 'Your Highness', 'Your Exaltedness']
-  greeting = honoriffics.sample
-else
-  greeting = cgi['name']
-end
-
 puts cgi.header
 
-puts "
-<!doctype html>
-<html>
-  <head>
-    <title>Mind... BLOWN</title>
-  </head>
-  <body>
-    Hello, #{greeting}.
-  </body>
-</html>"
+html_head = "<!doctype html><html><head>
+    <title>#{cgi['page']}</title></head><body>"
+
+html_foot = "</body></html>"
+
+if cgi['page'] == 'about'
+  puts "#{html_head} We are coders. #{html_foot}"
+else
+  puts "#{html_head} Wecome. Have a look around. #{html_foot}"
+end
