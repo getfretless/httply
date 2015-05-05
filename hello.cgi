@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require 'cgi'
+require 'erb'
+
 cgi = CGI.new
 puts cgi.header
 page = 'home'
@@ -12,8 +14,8 @@ end
 title = pages[page]
 
 def render(title, &content)
-  puts "<!doctype html><html><head><title>#{title}</title></head>
-  <body>#{yield}</body></html>"
+  layout = File.read 'layout.html.erb'
+  puts ERB.new(layout).result(binding)
 end
 
 def load_content(page)
